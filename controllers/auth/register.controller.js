@@ -40,7 +40,7 @@ const registerUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   if (!email || !name || !password || !userName) {
     return next(new ErrorHandler("All fields are required", 400));
   }
-  let user = await userModel.findOne({ email });
+  let user = await userModel.findOne({ email: email.toLowerCase() });
   if (user) {
     return next(new ErrorHandler("User already registered", 400));
   }
