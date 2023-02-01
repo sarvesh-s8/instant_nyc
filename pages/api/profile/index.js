@@ -4,10 +4,10 @@ import connectDB from "@/connectDB";
 import authMiddleware from "@/middleware/auth.middleware";
 import {
   getUserOwnProfile,
-  makeUserProfile,
+  updateUserProfile,
 } from "@/controllers/profile/profile.controller";
 
 const handler = nc({ onError });
 connectDB();
-handler.use(authMiddleware).put(makeUserProfile).get(getUserOwnProfile);
+handler.use(authMiddleware).put(updateUserProfile).get(getUserOwnProfile);
 export default handler;

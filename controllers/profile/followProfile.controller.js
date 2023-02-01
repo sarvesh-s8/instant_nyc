@@ -40,10 +40,24 @@ const getFollowing = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
 });
 
 // follow a user
-// api/follow/:userId Post
+// api/follow/:userID Post
 
 const followAUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-  
+  const { userID } = req.query;
+  const loggedInuser = await followerModel.findOne({ user: req.userId });
+  const userToFollowOrUnfollow = await followerModel.findOne({
+    user: userID,
+  });
+  if (!loggedInuser || !userToFollowOrUnfollow) {
+    return next(new ErrorHandler("User not found", 404));
+  }
+  const checkIfFollowing =
+    loggedInuser.following &&
+    loggedInuser.following.filter((e) => e.user.toString() === userID).length >
+      0;
+  if(checkIfFollowing){
+    // let 
+  }
 });
 
 export { getFollowers, getFollowing };
