@@ -7,7 +7,7 @@ import {
   updateUserProfile,
 } from "@/controllers/profile/profile.controller";
 
-const handler = nc({ onError });
 connectDB();
+const handler = nc({ onError });
 handler.use(authMiddleware).put(updateUserProfile).get(getUserOwnProfile);
 export default handler;

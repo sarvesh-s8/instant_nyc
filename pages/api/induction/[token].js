@@ -4,8 +4,8 @@ import connectDB from "@/connectDB";
 import { introduceUser } from "@/controllers/induction/induction.controller";
 import upload from "@/middleware/imageUpload.middleware";
 
-const handler = nc({ onError });
 connectDB();
+const handler = nc({ onError });
 handler.use(upload.single("profilePic")).post(introduceUser);
 
 export default handler;
