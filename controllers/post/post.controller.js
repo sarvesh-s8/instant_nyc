@@ -1,4 +1,5 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
+import followerModel from "@/models/followerModel";
 import postModel from "@/models/postModel";
 import userModel from "@/models/user.model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
@@ -59,13 +60,6 @@ const getAllPosts = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     posts,
   });
 });
-
-// get saves
-// // api/posts/saves
-// const getPostsSave = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-//   const userId = req.userId;
-//   // const postsSave = await
-// });
 
 // get particular Post
 // api/post/:postId
@@ -164,4 +158,43 @@ const deletePost = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   });
 });
 
-export { createPost, getAllPosts, getParticularPost, updatePost, deletePost };
+// Get Feed the followers post first
+// api/post/feed
+const getFeedPosts = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 1;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+  const user = await followerModel
+    .findOne({ user: req.userId })
+    .select("-followers");
+  const followingUsers = user.following.map((f) => f.user);
+  const total = await postModel.countDocuments({
+    user: { $in: followingUsers },
+  });
+  const posts = await postModel
+    .find({ user: { $in: followingUsers } })
+    .skip(startIndex)
+    .limit(limit)
+    .sort({ createdAt: -1 })
+    .populate("user");
+  let nextPage = null;
+  if (endIndex < total) {
+    nextPage = page + 1;
+  }
+  return res.status(200).json({
+    success: true,
+    message: "Feed fetched",
+    next: nextPage,
+    posts,
+  });
+});
+
+export {
+  createPost,
+  getAllPosts,
+  getParticularPost,
+  updatePost,
+  deletePost,
+  getFeedPosts,
+};

@@ -14,6 +14,7 @@ const handler = nc({ onError });
 handler.get(getParticularPost);
 
 handler.use(authMiddleware, upload.array("images", 5)).put(updatePost);
+
 handler.use(authMiddleware).delete(deletePost);
 export default handler;
 export const config = {
