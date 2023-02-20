@@ -30,7 +30,7 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   if (!bio) {
     return next(new ErrorHandler("Bio is required", 400));
   }
-  console.log(tags, "HErer", typeof tags, JSON.parse(tags));
+  // console.log(tags, "HErer", typeof tags, JSON.parse(tags));
   const { twitter, youtube } = JSON.parse(social);
   let profile = {};
   profile.user = user._id;
@@ -45,6 +45,7 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     profile.social.twitter = twitter;
   }
   await new profileModel(profile).save();
+
   jwt.sign({ userId: user._id }, process.env.JWT_SECRET, (err, token) => {
     if (err) {
       return next(new ErrorHandler(`${err}`, 400));

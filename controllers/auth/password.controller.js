@@ -28,7 +28,6 @@ const updatePassword = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   }
   let hashed = await bcrypt.hash(newPassword, 10);
   user.password = hashed;
-  console.log(user.password);
   await user.save();
   return res.status(200).json({
     success: true,
@@ -91,9 +90,10 @@ const forgotPassword = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     });
   }
   await user.save();
-  return res
-    .status(200)
-    .json({ success: true, message: "Mail sent successfully" });
+  return res.status(200).json({
+    success: true,
+    message: "Mail sent successfully",
+  });
 });
 
 // description: reset password
