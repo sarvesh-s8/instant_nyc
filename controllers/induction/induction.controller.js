@@ -4,6 +4,7 @@ import ErrorHandler from "@/server-utils/ErrorHandler";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import userModel from "@/models/user.model";
+import followerModel from "@/models/followerModel";
 
 // do verification and add user profile
 // /api/induction/:token
@@ -45,6 +46,12 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     profile.social.twitter = twitter;
   }
   await new profileModel(profile).save();
+
+  await new followerModel({
+    user: user._id,
+    followers: [],
+    following: [],
+  }).save();
 
   jwt.sign({ userId: user._id }, process.env.JWT_SECRET, (err, token) => {
     if (err) {
