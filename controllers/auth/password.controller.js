@@ -1,5 +1,5 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
-import userModel from "@/models/user.model";
+import userModel from "@/models/user.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";

@@ -1,8 +1,8 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
-import followerModel from "@/models/followerModel";
-import postModel from "@/models/postModel";
-import profileModel from "@/models/profile.model";
-import userModel from "@/models/user.model";
+import followerModel from "@/models/follower.Model";
+import postModel from "@/models/post.Model";
+import profileModel from "@/models/profile.Model";
+import userModel from "@/models/user.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 
 // Description get user profile

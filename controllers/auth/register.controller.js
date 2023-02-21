@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import path, { join } from "path";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import userModel from "@/models/user.model";
+import userModel from "@/models/user.Model";
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import htmlReader from "@/server-utils/htmlReader";
 import emailSend from "@/server-utils/sendEmail";

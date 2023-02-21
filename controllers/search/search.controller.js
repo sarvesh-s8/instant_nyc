@@ -1,5 +1,5 @@
-import userModel from "@/models/user.model";
-import postModel from "@/models/postModel";
+import userModel from "@/models/user.Model";
+import postModel from "@/models/post.Model";
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 
