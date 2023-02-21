@@ -4,35 +4,34 @@ const eventSchema = new Schema(
   {
     eventTitle: {
       type: String,
+      required: [true, "Title cannot be empty"],
     },
     eventDescription: {
       type: String,
+      required: [true, "Description cannot be empty"],
     },
     eventPic: {
-      type: String,
-      default: "",
+      type: [String],
+      required: [true, "Please post atleast 1 image"],
     },
-    eventDate: {
-      type: Date,
-    },
-    eventLink: {
-      type: String,
-    },
-    // eventLocation: {
-    //   latitude: {
-    //     type: String,
-    //   },
-    //   longitude: {
-    //     type: String,
-    //   },
+    // eventDate: {
+    //   type: Date,
+    //   default: Date.now,
     // },
-    eventFee: {
-      type: Number,
-    },
-    eventCity: {
-      type: String,
-      enum: ["mumbai", "newyork", "shanghai", "dubai", "abudhabi"],
-      required: [true, "City is a must"],
+    // eventLink: {
+    //   type: String,
+    // },
+    // eventFee: {
+    //   type: Number,
+    // },
+    // eventCity: {
+    //   type: String,
+    //   enum: ["mumbai", "newyork", "shanghai", "dubai", "abudhabi"],
+    //   required: [true, "City is a must"],
+    // },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {
@@ -43,3 +42,13 @@ const eventModel =
   mongoose.models.Event || mongoose.model("Event", eventSchema);
 
 export default eventModel;
+
+// },
+// eventLocation: {
+//   latitude: {
+//     type: String,
+//   },
+//   longitude: {
+//     type: String,
+//   },
+// },
