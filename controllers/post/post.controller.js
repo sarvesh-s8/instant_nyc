@@ -1,7 +1,7 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
-import followerModel from "@/models/followerModel";
-import postModel from "@/models/postModel";
-import userModel from "@/models/user.model";
+import followerModel from "@/models/follower.Model";
+import postModel from "@/models/post.Model";
+import userModel from "@/models/user.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 
 // Create a post

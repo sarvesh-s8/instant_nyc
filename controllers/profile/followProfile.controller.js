@@ -1,7 +1,7 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
-import followerModel from "@/models/followerModel";
-import userModel from "@/models/user.model";
+import followerModel from "@/models/follower.Model";
+import userModel from "@/models/user.Model";
 
 // get followers from username
 // /api/followers/:username Get
@@ -55,8 +55,8 @@ const followAUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     loggedInuser.following &&
     loggedInuser.following.filter((e) => e.user.toString() === userID).length >
       0;
-  if(checkIfFollowing){
-    // let 
+  if (checkIfFollowing) {
+    // let
   }
 });
 
