@@ -21,11 +21,17 @@ const getUserProfile = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     .find({ user: user._id })
     .sort({ createdAt: -1 })
     .populate("user");
+  const follow = await followerModel.findOne({ user: user._id });
+  // const sh = await followerModel.find();
+  // console.log(sh);
+
   return res.status(200).json({
     success: true,
     message: "User profile found",
     profile,
     posts,
+    followers: follow.followers,
+    following: follow.following,
   });
 });
 
@@ -54,10 +60,10 @@ const updateUserProfile = tryCatchAsyncErrorMiddleware(
     if (!profile) {
       return next(new ErrorHandler("Profile not found", 400));
     }
-    if (social.twitter) {
+    if (social?.twitter) {
       social.twitter = twitter;
     }
-    if (social.youtube) {
+    if (social?.youtube) {
       social.youtube = youtube;
     }
 

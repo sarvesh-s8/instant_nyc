@@ -3,61 +3,104 @@ import ErrorHandler from "@/server-utils/ErrorHandler";
 import followerModel from "@/models/follower.Model";
 import userModel from "@/models/user.Model";
 
-// get followers from username
-// /api/followers/:username Get
-const getFollowers = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-  const { userName } = req.query;
-  const user = await userModel.findOne({ userName: userName.toLowerCase() });
-  if (!user) {
-    return next(new ErrorHandler("User not available", 400));
+// api/profile/:username/followers
+// get user's followers info
+const getUserNameFollowers = tryCatchAsyncErrorMiddleware(
+  async (req, res, next) => {
+    let userName = req.query.userName.toLowerCase();
+    const user = await userModel.findOne({
+      userName,
+    });
+    if (!user) {
+      return next(new ErrorHandler("User not found", 400));
+    }
+    const followers = await followerModel
+      .findOne({ user: user._id })
+      .populate("followers.user");
+    console.log(followers);
+    return res.status(200).json({
+      success: true,
+      message: "Followers Fetched",
+      followers: followers.followers,
+    });
   }
-  const followers = await followerModel
-    .findOne({ user: user._id })
-    .populate("followers.user");
-  return res.status(200).json({
-    success: true,
-    message: "Data fetched",
-    data: followers,
-  });
-});
+);
 
-// get following persons from username
-// /api/following/:username Get
-const getFollowing = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-  const { username } = req.query;
-  const user = await userModel.findOne({ userName: username.toLowerCase() });
-  if (!user) {
-    return next(new ErrorHandler("User not available", 400));
+//  api/profile/:username/following
+// get user's following info
+const getUserNameFollowing = tryCatchAsyncErrorMiddleware(
+  async (req, res, next) => {
+    let userName = req.query.userName.toLowerCase();
+    const user = await userModel.findOne({
+      userName,
+    });
+    if (!user) {
+      return next(new ErrorHandler("User not found", 400));
+    }
+    const following = await followerModel
+      .findOne({ user: user._id })
+      .populate("following.user");
+
+    return res.status(200).json({
+      success: true,
+      message: "following Fetched",
+      following: following.following,
+    });
   }
-  const following = await followerModel
-    .findOne({ user: user._id })
-    .populate("following.user");
-  return res.status(200).json({
-    success: true,
-    message: "Data fetched",
-    data: following,
-  });
-});
 
-// follow a user
-// api/follow/:userID Post
+//  api/profile/follow/:userId
+//  follow a user Protected
+const putFollowOrUnfollow = tryCatchAsyncErrorMiddleware(
+  async (req, res, next) => {
+    const loggedInUser = await followerModel.findOne({ user: req.userId });
+    const userToFollowOrUnfollow = await followerModel.findOne({
+      user: req.query.userId,
+    });
+    console.log(loggedInUser, userToFollowOrUnfollow);
+    if (!loggedInUser || !userToFollowOrUnfollow) {
+      return next(new ErrorHandler("User not found", 400));
+    }
+    const isFollowing =
+      loggedInUser.following.length &&
+      loggedInUser.following.filter(
+        (f) => f.user.toString() === req.query.userId
+      ).length > 0;
+    if (isFollowing) {
+      let index = loggedInUser.following.findIndex(
+        (f) => f.toString() === req.query.userId
+      );
+      loggedInUser.following.splice(index, 1);
+      await loggedInUser.save();
+      index = userToFollowOrUnfollow.followers.findIndex(
+        (f) => f.user.toString() === req.userId
+      );
+      userToFollowOrUnfollow.followers.splice(index, 1);
+      await userToFollowOrUnfollow.save();
+      // notify
+      return res.status(200).json({
+        success: true,
+        message: "User unfollowed",
+        followers: userToFollowOrUnfollow.followers,
+      });
+    } else {
+      loggedInUser.following.unshift({ user: req.query.userId });
+      await loggedInUser.save();
 
-const followAUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-  const { userID } = req.query;
-  const loggedInuser = await followerModel.findOne({ user: req.userId });
-  const userToFollowOrUnfollow = await followerModel.findOne({
-    user: userID,
-  });
-  if (!loggedInuser || !userToFollowOrUnfollow) {
-    return next(new ErrorHandler("User not found", 404));
-  }
-  const checkIfFollowing =
-    loggedInuser.following &&
-    loggedInuser.following.filter((e) => e.user.toString() === userID).length >
-      0;
-  if (checkIfFollowing) {
-    // let
-  }
-});
+      userToFollowOrUnfollow.followers.unshift({ user: req.userId });
+      await userToFollowOrUnfollow.save();
+      // notify
+      return res.status(200).json({
+        success: true,
+        message: "User followed",
+        followers: userToFollowOrUnfollow.followers,
+      });
+    }
+    }
+);
 
-export { getFollowers, getFollowing };
+export { getUserNameFollowers, getUserNameFollowing, putFollowOrUnfollow };
+
+// "user":{"$oid":"63d972601801b7f0dfa82ecb"},
+// "followers":[],
+
+// "following":[]

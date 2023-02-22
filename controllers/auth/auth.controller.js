@@ -5,9 +5,8 @@ import ErrorHandler from "@/server-utils/ErrorHandler";
 import userModel from "@/models/user.Model";
 
 // description: Get logged in users info
-// /api/auth GET
+// /api/auth GET Protected
 const getUserInfo = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
-  // return res.status(200).json({ Hell: "SSL" });
   const user = await userModel.findById(req.userId);
   if (!user) {
     return next(new ErrorHandler("Kindly Verify your mail", 400));

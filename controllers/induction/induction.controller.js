@@ -3,7 +3,8 @@ import profileModel from "@/models/profile.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import userModel from "@/models/user.Model";
+import userModel from "@/models/user.model";
+import followerModel from "@/models/followerModel";
 
 // do verification and add user profile
 // /api/induction/:token
@@ -30,7 +31,7 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   if (!bio) {
     return next(new ErrorHandler("Bio is required", 400));
   }
-  console.log(tags, "HErer", typeof tags, JSON.parse(tags));
+  // console.log(tags, "HErer", typeof tags, JSON.parse(tags));
   const { twitter, youtube } = JSON.parse(social);
   let profile = {};
   profile.user = user._id;
@@ -45,6 +46,13 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     profile.social.twitter = twitter;
   }
   await new profileModel(profile).save();
+
+  await new followerModel({
+    user: user._id,
+    followers: [],
+    following: [],
+  }).save();
+
   jwt.sign({ userId: user._id }, process.env.JWT_SECRET, (err, token) => {
     if (err) {
       return next(new ErrorHandler(`${err}`, 400));

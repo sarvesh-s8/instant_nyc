@@ -30,7 +30,7 @@ const createPost = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   const post = await new postModel(createPostObject).save();
   return res.status(200).json({
     success: true,
-    data: post,
+    post,
     message: "Post created successfully",
   });
 });
@@ -102,7 +102,7 @@ const updatePost = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     return next(new ErrorHandler("Unauthorized User", 404));
   }
   let checkIfImage = req.files.map((e) => e.path.slice(-3));
-  console.log(checkIfImage);
+  // console.log(checkIfImage);
   let validation = [];
   for (let i of checkIfImage) {
     if (i === "img") {

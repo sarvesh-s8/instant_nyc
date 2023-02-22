@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 import tryCatchAsyncErrorMiddleware from "./tryCatchAsyncError.middleware";
-import userModel from "@/models/user.Model";
 const authMiddleware = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   if (!req.headers.authorization) {
     return next(new ErrorHandler("Unauthorized User", 401));
