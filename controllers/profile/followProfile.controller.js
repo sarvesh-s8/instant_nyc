@@ -1,7 +1,7 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
-import followerModel from "@/models/followerModel";
-import userModel from "@/models/user.model";
+import followerModel from "@/models/follower.Model";
+import userModel from "@/models/user.Model";
 
 // api/profile/:username/followers
 // get user's followers info
@@ -47,7 +47,6 @@ const getUserNameFollowing = tryCatchAsyncErrorMiddleware(
       following: following.following,
     });
   }
-);
 
 //  api/profile/follow/:userId
 //  follow a user Protected
@@ -96,7 +95,7 @@ const putFollowOrUnfollow = tryCatchAsyncErrorMiddleware(
         followers: userToFollowOrUnfollow.followers,
       });
     }
-  }
+    }
 );
 
 export { getUserNameFollowers, getUserNameFollowing, putFollowOrUnfollow };

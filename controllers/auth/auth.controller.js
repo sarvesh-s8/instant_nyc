@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
-import userModel from "@/models/user.model";
+import userModel from "@/models/user.Model";
 
 // description: Get logged in users info
 // /api/auth GET Protected

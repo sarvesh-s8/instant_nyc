@@ -59,7 +59,8 @@ const postSchema = new Schema(
     //       required: "You must supply coordinates!",
     //     },
     //   ],
-    // },
+    // },C
+    
   },
   {
     timestamps: true,
