@@ -1,4 +1,5 @@
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
+import commentModel from "@/models/comment.Model";
 import followerModel from "@/models/follower.Model";
 import postModel from "@/models/post.Model";
 import userModel from "@/models/user.Model";
@@ -28,6 +29,7 @@ const createPost = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     images: req.files.map((file) => file.path),
   };
   const post = await new postModel(createPostObject).save();
+  await new commentModel({ post: post._id, comments: [] }).save();
   return res.status(200).json({
     success: true,
     post,

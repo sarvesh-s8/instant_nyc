@@ -3,8 +3,8 @@ import profileModel from "@/models/profile.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import userModel from "@/models/user.model";
-import followerModel from "@/models/followerModel";
+import userModel from "@/models/user.Model";
+import followerModel from "@/models/follower.Model";
 
 // do verification and add user profile
 // /api/induction/:token

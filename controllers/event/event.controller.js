@@ -1,7 +1,7 @@
-import userModel from "@/models/user.model";
+import userModel from "@/models/user.Model";
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
-import eventModel from "@/models/eventModel";
+import eventModel from "@/models/event.Model";
 
 const createEvent = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   const userId = req.userId;
