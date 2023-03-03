@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import userModel from "@/models/user.Model";
 import followerModel from "@/models/follower.Model";
-
+import notificationModel from "@/models/notification.Model";
+import attendModel from "@/models/attend.Model";
 // do verification and add user profile
 // /api/induction/:token
 const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
@@ -51,6 +52,11 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
     user: user._id,
     followers: [],
     following: [],
+  }).save();
+
+  await new notificationModel({
+    user: user._id,
+    notifications: [],
   }).save();
 
   jwt.sign({ userId: user._id }, process.env.JWT_SECRET, (err, token) => {

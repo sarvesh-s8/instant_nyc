@@ -4,6 +4,12 @@ import postModel from "@/models/post.Model";
 import commentModel from "@/models/comment.Model";
 import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middleware";
 import ErrorHandler from "@/server-utils/ErrorHandler";
+import {
+  newCommentNotification,
+  removeCommentNotification,
+  newReplyNotification,
+  removeReplyNotification,
+} from "@/server-utils/notification";
 
 // /api/comment/:postId
 // get Comment on a post
@@ -49,8 +55,15 @@ const postCommentsOnPost = tryCatchAsyncErrorMiddleware(
     post = await commentModel.populate(post, "comments.user");
     post = await commentModel.populate(post, "comments.replies.user");
     const postInfo = await postModel.findById(req.query.postId);
-    // if (postInfo.user.toString() !== req.userId) {
-    // }
+    if (postInfo.user.toString() !== req.userId) {
+      await newCommentNotification(
+        postInfo.user,
+        req.userId,
+        req.query.postId,
+        comment.commentId,
+        text
+      );
+    }
     return res.status(201).json({
       success: true,
       message: "Comment saved",
@@ -84,8 +97,15 @@ const deleteCommentPost = tryCatchAsyncErrorMiddleware(
       post = await post.save();
       post = await commentModel.populate(post, "comments.user");
       post = await commentModel.populate(post, "comments.replies.user");
-      // const postInfo = await postModel.findById(postId);
-      // if
+      const postInfo = await postModel.findById(postId);
+      if (postInfo.user.toString() !== req.userId) {
+        await removeCommentNotification(
+          postInfo.user.toString(),
+          req.userId,
+          postId,
+          comment.commentId
+        );
+      }
 
       return res.status(200).json({
         success: true,
@@ -134,9 +154,18 @@ const putReplyToComment = tryCatchAsyncErrorMiddleware(
 
     post = await commentModel.populate(post, "comments.user");
     post = await commentModel.populate(post, "comments.replies.user");
+    if (commentToReply.user._id.toString() !== req.userId) {
+      // user, userReplied, postId, replyId, reply
+      await newReplyNotification(
+        commentToReply.user._id.toString(),
+        req.userId,
+        postId,
+        reply.replyId,
+        text
+      );
+    }
 
-    //
-    return res.status(200).json({
+    return res.status(201).json({
       success: true,
       message: "Reply saved",
       comments: post.comments,
@@ -175,8 +204,14 @@ const deleteReplyToComment = tryCatchAsyncErrorMiddleware(
       post = await commentModel.populate(post, "comments.user");
       post = await commentModel.populate(post, "comments.replies.user");
 
-      // if (parentComment.user._id.toString() !== req.userId) {
-      // }
+      if (parentComment.user._id.toString() !== req.userId) {
+        await removeReplyNotification(
+          parentComment.user._id.toString(),
+          req.userId,
+          postId,
+          reply.replyId
+        );
+      }
       return res.status(200).json({
         success: true,
         message: "Reply deleted",

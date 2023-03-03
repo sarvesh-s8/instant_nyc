@@ -2,6 +2,10 @@ import tryCatchAsyncErrorMiddleware from "@/middleware/tryCatchAsyncError.middle
 import userModel from "@/models/user.Model";
 import postModel from "@/models/post.Model";
 import ErrorHandler from "@/server-utils/ErrorHandler";
+import {
+  newLikeNotification,
+  removeLikeNotification,
+} from "@/server-utils/notification";
 
 // get saves
 // // api/posts/saves
@@ -62,6 +66,13 @@ const likeOrUnlikePost = tryCatchAsyncErrorMiddleware(
       );
       post.likes.splice(indexLikePost, 1);
       post = await post.save();
+      if (post.user.toString() !== req.userId) {
+        await removeLikeNotification(
+          post.user.toString(),
+          req.userId,
+          req.query.postId
+        );
+      }
       return res.status(200).json({
         success: true,
         message: "Post Unliked",
@@ -70,6 +81,13 @@ const likeOrUnlikePost = tryCatchAsyncErrorMiddleware(
     } else {
       post.likes.unshift({ user: req.userId });
       post = await post.save();
+      if (post.user.toString() !== req.userId) {
+        await newLikeNotification(
+          post.user.toString(),
+          req.userId,
+          req.query.postId
+        );
+      }
       return res.status(200).json({
         success: true,
         message: "Post Liked",

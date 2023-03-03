@@ -10,25 +10,30 @@ const eventSchema = new Schema(
       type: String,
       required: [true, "Description cannot be empty"],
     },
-    eventPic: {
+    eventImages: {
       type: [String],
-      required: [true, "Please post atleast 1 image"],
     },
-    // eventDate: {
-    //   type: Date,
-    //   default: Date.now,
-    // },
-    // eventLink: {
-    //   type: String,
-    // },
-    // eventFee: {
-    //   type: Number,
-    // },
-    // eventCity: {
-    //   type: String,
-    //   enum: ["mumbai", "newyork", "shanghai", "dubai", "abudhabi"],
-    //   required: [true, "City is a must"],
-    // },
+    eventDate: {
+      type: Date,
+      default: Date.now,
+    },
+    eventLink: {
+      type: String,
+    },
+    eventFee: {
+      required: [true, "Entry Fee"],
+      type: Number,
+      min:[0,]
+    },
+    eventCity: {
+      type: String,
+      enum: ["mumbai", "newyork", "shanghai", "dubai", "abudhabi"],
+      required: [true, "City is a must"],
+    },
+    eventBanner: {
+      type: String,
+      required: [true, "Image is necessary"],
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
