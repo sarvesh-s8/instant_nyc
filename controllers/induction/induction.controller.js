@@ -7,6 +7,7 @@ import userModel from "@/models/user.Model";
 import followerModel from "@/models/follower.Model";
 import notificationModel from "@/models/notification.Model";
 import attendModel from "@/models/attend.Model";
+import chatModel from "@/models/chat.Model";
 // do verification and add user profile
 // /api/induction/:token
 const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
@@ -57,6 +58,11 @@ const introduceUser = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
   await new notificationModel({
     user: user._id,
     notifications: [],
+  }).save();
+
+  await new chatModel({
+    user: user._id,
+    chats: [],
   }).save();
 
   jwt.sign({ userId: user._id }, process.env.JWT_SECRET, (err, token) => {
