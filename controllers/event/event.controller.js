@@ -172,6 +172,10 @@ const getEventAttendees = tryCatchAsyncErrorMiddleware(
     });
   }
 );
+
+// const createNews = tryCatchAsyncErrorMiddleware(async (req, re, next) => {
+//   const res = await
+// });
 export {
   createEvent,
   getEvents,
