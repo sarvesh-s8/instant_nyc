@@ -10,5 +10,5 @@ const Header = ({ title }) => {
 };
 export default Header;
 Header.defaultProps = {
-  title: "Travelinsta",
+  title: "RoamMate",
 };

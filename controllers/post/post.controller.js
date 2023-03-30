@@ -129,7 +129,10 @@ const updatePost = tryCatchAsyncErrorMiddleware(async (req, res, next) => {
         ? JSON.parse(originalImages)
         : req.files.map((e) => e.path),
     };
-    post = await postModel.findByIdAndUpdate(postId, postObject, { new: true });
+    post = await postModel.findByIdAndUpdate(postId, postObject, {
+      new: true,
+      runValidators: true,
+    });
     return res.status(201).json({
       success: true,
       message: "Post edited successfully",

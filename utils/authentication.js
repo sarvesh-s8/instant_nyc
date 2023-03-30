@@ -15,7 +15,7 @@ export const registerUser = async (
 ) => {
   setLoading(true);
   try {
-    const res = await axios.post(`${backendUrl}/api/register`, {
+    const res = await axios.post(`${backendUrl}/api/auth/register`, {
       name,
       userName,
       email,
