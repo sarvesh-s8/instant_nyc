@@ -93,18 +93,18 @@ const Register = () => {
     userName === "" ? setUserNameAvailable(false) : checkUserName();
   }, [userName]);
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[#ede9fe] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen flex items-center justify-center bg-primary-1 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900 selection:bg-violet-300">
             Welcome to RoamMate
           </h2>
-          <p className="text-center text-[#5b21b6] mt-2 mb-6 font-semibold text-md">
+          <p className="text-center text-primary-5 mt-2 mb-6 font-bold text-md selection:bg-violet-300">
             We're thrilled to have you onboard.
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded0md shadow-sm space-y-4">
+          <div className="rounded-0-md shadow-sm space-y-4">
             <div>
               <label
                 htmlFor="name"
@@ -124,7 +124,7 @@ const Register = () => {
                   id="name"
                   required
                   onChange={handleChange}
-                  className="focus:ring-pink-500 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                  className=" block w-full pl-10 p-2 sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
             </div>
@@ -154,7 +154,9 @@ const Register = () => {
                   type="text"
                   name="userName"
                   id="userName"
-                  className={`focus:ring-pink-500 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md ${
+                  className={` block w-full 
+                  p-2 pl-10 sm:text-sm border-gray-300 
+                  rounded-md ${
                     userName !== "" && !userNameAvailable ? "bg-red-100" : ""
                   }`}
                   placeholder="User Name"
@@ -184,14 +186,14 @@ const Register = () => {
                 Email
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-evnents-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <AiOutlineMail className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
                   type="email"
                   name="email"
                   value={email}
-                  className="focus:ring-pink-500 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                  className="p-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
                   placeholder="mail@domain.com"
                   onChange={handleChange}
                   required
@@ -224,7 +226,7 @@ const Register = () => {
                   type={showPassword ? "text" : "password"}
                   name="password"
                   id="password"
-                  className="focus:ring-pink-500 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                  className=" p-2 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
                   value={password}
                   onChange={handleChange}
                   required
@@ -238,7 +240,7 @@ const Register = () => {
             <div className="text-sm">
               <Link
                 href="/login"
-                className="font-medium text-pink-600 hover:text-pink-500"
+                className="font-medium text-primary-3 hover:text-primary-5"
               >
                 Already have an account ?
               </Link>
@@ -247,7 +249,7 @@ const Register = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-3 hover:bg-primary-5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-5 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={submitDisabled || !userNameAvailable}
             >
               {loading && (

@@ -25,7 +25,7 @@ const groupSchema = new Schema({
     default: "public",
     enum: ["public", "private"],
   },
-  creaatedBy: {
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
