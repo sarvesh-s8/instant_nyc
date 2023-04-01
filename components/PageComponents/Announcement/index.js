@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContactModal from "./Contact.Modal.jsx";
-const LandingComponent = () => {
+const AnnouncementPage = () => {
   const [open, setOpen] = useState(false);
   return (
     <section className="bg-[#220337]">
@@ -35,4 +35,4 @@ const LandingComponent = () => {
   );
 };
 
-export default LandingComponent;
+export default AnnouncementPage;

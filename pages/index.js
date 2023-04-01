@@ -1,13 +1,13 @@
 import Banner from "@/components/PageComponents/Landing/Banner";
 import Feature from "@/components/PageComponents/Landing/Features";
-import LandingComponent from "@/components/PageComponents/Announcement";
+import LandingPage from "@/components/PageComponents/Landing/index";
 
-const LandingPage = (props) => {
+const Landing = (props) => {
   return (
     <>
       <Banner />
       <Feature />
-      <LandingComponent />
+      <LandingPage />
     </>
   );
 };
@@ -15,9 +15,9 @@ const LandingPage = (props) => {
 export function getServerSideProps() {
   return {
     props: {
-      title: "Traveloo",
+      title: "RoamMate",
     },
   };
 }
 
-export default LandingPage;
+export default Landing;

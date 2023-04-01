@@ -42,20 +42,10 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  // { name, userName, email, password },
-  // setError,
-  // setLoading,
-  // toast,
-  // setModalOpen
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await registerUser(
-      { name, userName, email, password },
-      setError,
-      setLoading,
-      toast,
-      setModalOpen
-    );
+    await registerUser(user, setError, setLoading, toast, setModalOpen);
   };
 
   const checkUserName = async () => {
@@ -85,7 +75,9 @@ const Register = () => {
   };
 
   useEffect(() => {
-    const isUser = Object.values({}).every((i) => Boolean(i));
+    const isUser = Object.values({ name, email, password }).every((i) =>
+      Boolean(i)
+    );
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
 
@@ -93,13 +85,13 @@ const Register = () => {
     userName === "" ? setUserNameAvailable(false) : checkUserName();
   }, [userName]);
   return (
-    <section className="min-h-screen flex items-center justify-center bg-primary-1 py-12 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900 selection:bg-violet-300">
+          <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900 selection:bg-primary-1">
             Welcome to RoamMate
           </h2>
-          <p className="text-center text-primary-5 mt-2 mb-6 font-bold text-md selection:bg-violet-300">
+          <p className="text-center text-primary-5 mt-2 mb-6 font-bold text-md selection:bg-primary-1">
             We're thrilled to have you onboard.
           </p>
         </div>
