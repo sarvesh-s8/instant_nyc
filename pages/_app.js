@@ -14,7 +14,6 @@ import backendUrl from "@/utils/baseUrl";
 import Layout from "@/components/Layout";
 function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());
-  console.log(Component);
   return (
     <>
       <QueryClientProvider client={queryClient}>
