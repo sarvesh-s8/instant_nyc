@@ -1,6 +1,7 @@
 import NextNProgress from "nextjs-progressbar";
 import Router, { useRouter } from "next/router";
 import Footer from "../Footer";
+import Navbar from "../Navbar";
 const Layout = ({ children, user }) => {
   const router = useRouter();
   const paths = [
@@ -31,7 +32,7 @@ const Layout = ({ children, user }) => {
     <>
       <NextNProgress />
       <div className="flex flex-col min-h-screen">
-        {showNavbar() && <div>Navbar</div>}
+        {showNavbar() && <Navbar />}
         <main className="flex-1">{children}</main>
         {showFooter() && <Footer />}
       </div>
