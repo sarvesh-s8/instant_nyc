@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
+
 html{
   font-family: sans-serif;
+}
+.font-salsa{
+  font-family: 'Salsa', cursive;
 }

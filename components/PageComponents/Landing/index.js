@@ -1,4 +1,6 @@
 import Link from "next/link";
+import RoamMate from "./Svg/RoamMate-sm.svg";
+import Image from "next/image";
 const LandingPage = () => {
   return (
     <>
@@ -9,7 +11,7 @@ const LandingPage = () => {
               Join the fun now!
             </span>
             <span className="block text-primary-5 selection:bg-primary-1">
-              Join RoamMate today
+              Join <span className="font-salsa">RoamMate</span> today
             </span>
           </h2>
           <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">

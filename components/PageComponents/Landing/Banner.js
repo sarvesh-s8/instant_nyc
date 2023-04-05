@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
+import RoamMate from "./Svg/RoamMate-lg.svg";
 const Banner = () => {
   return (
     <section className="bg-white-100">
@@ -82,11 +82,11 @@ const Banner = () => {
         >
           <div className="mt-16 mx-auto max-w-7xl px-4 sm:px-6 ">
             <div className="text-center ">
-              <h1 className="text-4xl tracking-light  text-gray-900 sm:text-5xl md:text-6xl selection:bg-violet-100">
-                <span className="block text-[#7c3aed] font-bold my-2">
+              <h1 className="text-4xl tracking-light  text-gray-900 sm:text-5xl md:text-6xl selection:bg-violet-100 font-salsa">
+                <span className="block text-[#7c3aed] font-bold my-2 ">
                   RoamMate
                 </span>
-                <span className="block text-[#7c3aed]  font-light font-serif">
+                <span className="block text-[#7c3aed]  font-light font-salsa">
                   Connect, Chill & Relax
                 </span>
               </h1>
@@ -116,7 +116,7 @@ const Banner = () => {
         <div className="relative">
           <div className="absolute inset-0 flex flex-col">
             <div className="flex-1"></div>
-            <div className="flex-1 w-full bg-[#7c3aed]"></div>
+            <div className="flex-1 w-full bg-primary-1"></div>
           </div>
           <motion.div
             initial={{ y: 120, opacity: 0 }}
@@ -125,15 +125,13 @@ const Banner = () => {
             className="max-w-7xl mx-auto px-4 sm:px-6"
           >
             <Image
-              className="relative rounded-lg shadow-lg"
-              src="https://images.unsplash.com/photo-1678876403327-13ac6aa6e8aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-              width={1920}
-              height={1080}
+              className="relative w-full h-full rounded-lg shadow-lg"
+              src={RoamMate}
+              alt={"Landing Image"}
             />
           </motion.div>
         </div>
       </div>
-      <div className="bg-[#7c3aed] pb-12"></div>
     </section>
   );
 };

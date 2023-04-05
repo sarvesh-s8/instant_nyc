@@ -42,7 +42,7 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await registerUser(user, setError, setLoading, toast, setModalOpen);
@@ -89,10 +89,12 @@ const Register = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900 selection:bg-primary-1">
-            Welcome to RoamMate
+            Welcome to{" "}
+            <span className="font-salsa text-primary-4">RoamMate</span>
           </h2>
           <p className="text-center text-primary-5 mt-2 mb-6 font-bold text-md selection:bg-primary-1">
-            We're thrilled to have you onboard.
+            We're thrilled to have you{" "}
+            <span className="font-salsa">onboard</span>
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

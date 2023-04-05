@@ -38,10 +38,10 @@ const Login = () => {
     <section className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-bold text-gray-900 selection:bg-violet-300">
+          <h2 className="mt-6 text-center text-3xl font-bold text-gray-900 selection:bg-primary-1ls">
             Welcome Back !
           </h2>
-          <p className="text-center text-primary-4 mt-2 mb-6 font-semibold text-md selection:bg-violet-300">
+          <p className="text-center text-primary-4 mt-2 mb-6 font-semibold text-md selection:bg-primary-1ls">
             Lets post something.
           </p>
         </div>

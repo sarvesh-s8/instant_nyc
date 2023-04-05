@@ -23,7 +23,7 @@ const TopCities = () => {
               key={c.name}
               onMouseEnter={() => setIsHovered(index)}
               onMouseLeave={() => setIsHovered(null)}
-              className={`sm:w-30 rounded overflow-hidden shadow-lg h-52 sm:h-80 border-solid border-2 border-primary-5 flex-column justify-center ${
+              className={`sm:w-30 rounded overflow-hidden shadow-lg h-50 sm:h-80 border-solid border-2 border-primary-5 flex-column justify-center ${
                 isHovered === index ? "bg-primary-1" : "white"
               }`}
             >
@@ -35,7 +35,7 @@ const TopCities = () => {
               <div className="px-6 py-4 h-1/3 ">
                 <Link href={`/city/${c.link}`}>
                   <div
-                    className={`font-bold text-xl mb-2 text-center ${
+                    className={`font-bold font-salsa  text-xl mb-2 text-center ${
                       isHovered === index ? "text-primary-5" : "text-primary-4"
                     }`}
                   >
