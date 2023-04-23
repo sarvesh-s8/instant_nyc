@@ -32,7 +32,14 @@ const TopCities = () => {
                 src={c.image}
                 alt={c.name}
               />
-              <div className="px-6 py-4 h-1/3 ">
+              <div
+                className="px-6 py-4 h-1/3 flex-column justify-center"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
+              >
                 <Link href={`/city/${c.link}`}>
                   <div
                     className={`font-bold font-salsa  text-xl mb-2 text-center ${
@@ -53,4 +60,3 @@ const TopCities = () => {
 
 export default TopCities;
 
-// </div>

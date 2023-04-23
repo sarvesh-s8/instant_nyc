@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import RoamMate from "./Svg/RoamMate-lg.svg";
+import Card from "./Card";
 const Banner = () => {
   return (
     <section className="bg-white-100">

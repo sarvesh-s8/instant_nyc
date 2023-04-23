@@ -9,3 +9,116 @@ html{
 .font-salsa{
   font-family: 'Salsa', cursive;
 }
+.parent {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr 1fr;
+  grid-template-rows: 0.6fr 1.2fr 0.8fr 1.2fr 1fr;
+  gap: 10px 10px;
+  grid-auto-flow: column dense;
+  grid-template-areas:
+  "div1 div7 div7 div4"
+  "div1 div3 div3 div4"
+  "div1 div3 div3 div5"
+  "div2 div3 div3 div5"
+  "div2 div6 div6 div5";
+  height: 600px;
+  background-color: aliceblue;
+}
+  
+.div1 {
+  grid-area: div1
+}
+
+.div2 {
+  grid-area: div2
+}
+
+.div4 {
+  grid-area: div4
+}
+
+.div5 {
+  grid-area: div5
+}
+
+.div6 {
+  grid-area: div6
+}
+
+.div3 {
+  grid-area: div3
+}
+
+.div7 {
+  grid-area: div7
+}
+
+
+  @media screen and (min-width:768px) {
+  .parent { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 0.7fr 1fr 0.8fr .8fr 1.2fr;
+  gap: 20px 20px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    ". . div4"
+    ". div2 div4"
+    "div1 div2 div4"
+    "div1 div2 div5"
+    "div1 div3 div5"
+    "div6 div3 div5";
+  }
+
+  .div1 { 
+    grid-area: div1;
+  }
+
+  .div2 { 
+    grid-area: div2;
+  }
+
+  .div3 { 
+    grid-area: div3;
+  }
+
+  .div4 { 
+    grid-area: div4;
+  }
+
+  .div5 { 
+    grid-area: div5;
+  }
+
+  .div7{
+  display: none;
+  }
+
+
+}
+
+.div6 { 
+  grid-area: div6;
+  display: grid;
+  grid-template-columns: 0.2fr 2fr 0.2fr;
+  grid-template-rows: 0.4fr 0.8fr 0.4fr;
+  gap: 5px 5px;
+  grid-auto-flow: row dense;
+  grid-template-areas:
+    ". . ."
+    "btn-div-1 btn-div-2 btn-div-3"
+    ". . ."
+}
+
+
+
+.btn-div-1{
+  grid-area: btn-div-1;
+}
+.btn-div-2{
+  grid-area: btn-div-2;
+}
+.btn-div-3{
+  grid-area: btn-div-3;
+}
+

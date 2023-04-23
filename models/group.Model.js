@@ -29,6 +29,9 @@ const groupSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  groupImage: {
+    type: String,
+  },
   groupPosts: [
     {
       posts: {
@@ -37,6 +40,9 @@ const groupSchema = new Schema({
       },
     },
   ],
+  groupDescription: {
+    typr: String,
+  },
 });
 
 const groupModel =
