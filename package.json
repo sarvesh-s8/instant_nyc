@@ -43,6 +43,7 @@
     "react-query": "^3.39.3",
     "react-quill": "^2.0.0",
     "react-toastify": "^9.1.1",
+    "resize-observer-polyfill": "^1.5.1",
     "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
   },

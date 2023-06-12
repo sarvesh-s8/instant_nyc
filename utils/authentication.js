@@ -21,6 +21,7 @@ export const registerUser = async (
       email,
       password,
     });
+    console.log(toast);
     toast.info(res.data.message);
     setModalOpen(true);
   } catch (error) {

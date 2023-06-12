@@ -16,11 +16,11 @@ html{
   gap: 10px 10px;
   grid-auto-flow: column dense;
   grid-template-areas:
-  "div1 div7 div7 div4"
+  "div1 div6 div6  div4"
   "div1 div3 div3 div4"
   "div1 div3 div3 div5"
   "div2 div3 div3 div5"
-  "div2 div6 div6 div5";
+  "div2 div7 div7 div5";
   height: 600px;
   background-color: aliceblue;
 }
@@ -122,3 +122,13 @@ html{
   grid-area: btn-div-3;
 }
 
+@media screen and (max-width: 400px) {
+  .tailwind-height{
+    height: 150px !important;
+  }
+}
+@media screen and (min-width:400px) and  (max-width: 768px) {
+  .tailwind-height{
+    height: 250px !important;
+  }
+}

@@ -10,9 +10,9 @@ const Landing = () => {
   return (
     <>
       <Banner />
-      <TopCities isHovered={isHovered} setIsHovered={setIsHovered} />
-      <Feature />
       <Explore />
+      {/* <TopCities isHovered={isHovered} setIsHovered={setIsHovered} /> */}
+      <Feature />
       <LandingPage />
     </>
   );

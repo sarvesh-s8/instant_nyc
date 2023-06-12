@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Script from "next/script";
 import { useRouter } from "next/router";
@@ -12,8 +13,21 @@ import Head from "../components/Head/index";
 import { redirectUser } from "@/utils/authentication";
 import backendUrl from "@/utils/baseUrl";
 import Layout from "@/components/Layout";
+
 function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      console.log(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+  console.log(pageProps, "PageProps");
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -32,7 +46,13 @@ function App({ Component, pageProps }) {
 App.getInitialProps = async ({ ctx }) => {
   const { token } = parseCookies(ctx);
   let pageProps = {};
-  const protectedRoutes = ctx.pathname === "/feed";
+  const protectedRoutes =
+    ctx.pathname === "/feed" ||
+    ctx.pathname === "/posts/new" ||
+    ctx.pathname === "/posts/edit/[id]" ||
+    ctx.pathname === "/notifications" ||
+    ctx.pathname === "/messages" ||
+    ctx.pathname === "/settings";
   const adminRoutes =
     ctx.pathname === "/admin" ||
     ctx.pathname === "/events/new" ||
@@ -43,9 +63,10 @@ App.getInitialProps = async ({ ctx }) => {
     ctx.pathname === "/search" ||
     ctx.pathname === "/announcement" ||
     ctx.pathname === "/events";
+
   if (!token) {
     destroyCookie(ctx, "token");
-    protectedRoutes && redirectUser(ctx, "/login");
+    protectedRoutes && adminRoutes && redirectUser(ctx, "/login");
   } else {
     try {
       const res = await axios.get(`${backendUrl}/api/auth`, {

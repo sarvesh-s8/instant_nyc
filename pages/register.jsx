@@ -2,8 +2,8 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import backendUrl from "@/utils/baseUrl";
-import { registerUser } from "@/utils/authentication";
+import backendUrl from "../utils/baseUrl";
+import { registerUser } from "../utils/authentication";
 import {
   AiOutlineLoading,
   AiOutlineLock,
