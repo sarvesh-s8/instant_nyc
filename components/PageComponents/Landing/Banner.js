@@ -133,8 +133,7 @@ const Banner = () => {
           </motion.div>
         </div>
       </div>
-      <h4 className="text-primary-3 font-bold text-left mt-10 text-4
-      xl leading-8  tracking-light px-5 text-gray-900  md:text-center lg:mx-4 ">
+      <h4 className="text-primary-3 font-bold text-left mt-10 text-4xl leading-8  tracking-light px-5 text-gray-900  md:text-center lg:mx-4 ">
         Adventure Awaits You
         <br />
         <span className="inline-block bg-primary-1  font-salsa text-primary-5">
